@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Project Gallery</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .gallery-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .class-works {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .project-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            width: 50%;
+        }
+
+        .project-button {
+
+
+
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: 1px solid #ccc;
+
+            
+            cursor: pointer;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        .project-button.active {
+            background-color: #e0e0e0;
+        }
+
+        .project-content {
+            width: 100%;
+            height: 100vh;
+            border: 1px solid #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            padding: 20px;
+            background-color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .default-message {
+            font-size: 24px;
+            text-align: left;
+            color: black; /* Set text color to black by default */
+            font-weight: bold;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gallery-title">Dynamic Project Gallery</div>
+
+    <div class="class-works">Class Works</div>
+
+    <div class="project-buttons">
+        <button class="project-button" data-project="task1">Task 1</button>
+        <button class="project-button" data-project="task2">Task 2</button>
+        <button class="project-button" data-project="task3">Task 3</button>
+        <button class="project-button" data-project="task4">Task 4</button> <!-- Added Task 4 -->
+    </div>
+
+    <div class="project-content" id="display-area">
+        <div class="default-message">Click a link to display a project here.</div>
+    </div>
+
+    <script>
+        const buttons = document.querySelectorAll('.project-button');
+        const displayArea = document.getElementById('display-area');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const project = button.dataset.project;
+
+                // Remove all active classes and task-specific classes
+                buttons.forEach(btn => {
+                    btn.classList.remove('active', 'task1-active', 'task2-active', 'task3-active', 'task4-active');
+                });
+
+                // Add the active class and task-specific class to the clicked button
+                button.classList.add('active');
+                if (project === 'task1') {
+                    button.classList.add('task1-active');
+                    displayArea.style.backgroundColor = "red"; // Red for Task 1
+                    displayArea.innerHTML = `<div class="default-message" style="color: white;">Task 1</div>`;
+                } else if (project === 'task2') {
+                    button.classList.add('task2-active');
+                    displayArea.style.backgroundColor = "green"; // Green for Task 2
+                    displayArea.innerHTML = `<div class="default-message" style="color: white;">Task 2</div>`;
+                } else if (project === 'task3') {
+                    button.classList.add('task3-active');
+                    displayArea.style.backgroundColor = "blue"; // Blue for Task 3
+                    displayArea.innerHTML = `<div class="default-message" style="color: white;">Task 3</div>`;
+                } else if (project === 'task4') {
+                    button.classList.add('task4-active');
+                    displayArea.style.backgroundColor = "orange"; // Orange for Task 4
+                    displayArea.innerHTML = `<div class="default-message" style="color: white;">Task 4</div>`;
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
